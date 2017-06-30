@@ -10,6 +10,7 @@
 <body>
 	<!-- form -->
 <div class="container">
+ <div class="alert alert-success hide" rule="alert">Registration Successful!</div>
   <form>
     <input type="hidden" class ="form-control" id="inputID" value="9000085">
     <h4>Sign up for free</h4>
@@ -79,11 +80,14 @@
       })
       .done(function( msg ) {
         if (msg == 'OK') {
+		
           // show success msg (todo)
- 
+ 	  $('#successMsg').removeClass('hide').show();
           // reset form (todo)
- 
+ 	  $('input[type=text],input[type=email], input[type=password]', 'form').val(null);
+	  
           // hide save modal (todo)
+          $(#saveModal').modal('hide');
         }
       });
       
