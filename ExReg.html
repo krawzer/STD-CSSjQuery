@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Registration Form</title>
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<!--<script src="js/bootstrap.min.js"></script>-->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <meta charset="UTF-8">
+  <title>Sign-up</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
 </head>
 <body>
-	<!-- form -->
 <div class="container">
   <div class="row">
     <div class="panel panel-default col-md-8 col-md-offset-2">
@@ -64,63 +62,46 @@
     </div>
   </div>
 </div>
-  <!-- script -->
+
 <script type="text/javascript">
-
-  // load script when document is ready (all resources loaded)
   $(document).ready(function() {
-    // global input variable
     var input = {};
- 
-    // on form submit
     $('form').submit(function(e) {
-      console.log("submit");
       e.preventDefault();
- 
       var $this = $(this);
-      // serialize form, for form submission
       input = $this.serialize();
-      
-      // fill in user input on modal box (todo)
-      $('#saveModal .userInput').empty(); 
+      console.log(input);
+      // fill in user input
+      $('#saveModal .userInput').empty();
       $('#saveModal .userInput').append(
-        
-          $('<p></p>').html('<strong>Name: </strong>' +$this.find('#inputFirstName').val() + ' ' + $this.find('#inputLastName').val())
+        $('<p></p>').html('<strong>Name: </strong>'+ $('#inputFirstName').val() +' '+ $('#inputLastName').val())
       );
-        $('#saveModal.userInput').append(
-          $('<p></p>').html('<strong>Email: </strong>' + $('#inputemail').val())
-      // show save modal (tod)
+      $('#saveModal .userInput').append(
+        $('<p></p>').html('<strong>Email: </strong>'+ $('#inputEmail').val())
+      );
       $('#saveModal').modal('show');
-
     });
- 
-    // on btn-login click
     $('.btn-login').click(function(e) {
       e.preventDefault();
-      // send ajax request (todo)
+      // send ajax request
       $.ajax({
         method: "POST",
-        url: "http://localhost/speaking/st-activities/register.php",
+        url: "http://tolitsdelizo.info/st-activities/jquery/register.php",
         data: input
       })
       .done(function( msg ) {
         if (msg == 'OK') {
-		
-          // show success msg (todo)
- 	  $('#successMsg').removeClass('hide').show();
-          // reset form (todo)
- 	  $('input[type=text], input[type=email], input[type=password]', 'form').val(null);
-	  
-          // hide save modal (todo)
-          $('#saveModal').modal('hide');
+          // show success msg
+          $('#successMsg').removeClass('hide').show();
+          // reset form
+          $('input[type=text], input[type=email], input[type=password]', 'form').val(null);
+          $('#saveModal').modal('hide');          
         }
       });
       
     });
   });
 </script>
-
-
 
 </body>
 </html>
